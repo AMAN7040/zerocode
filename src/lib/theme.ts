@@ -1,7 +1,7 @@
 import { Theme } from "@/types/themeType";
 
 export const getSystemTheme = (): Theme => {
-  return window.matchMedia("(prefers-color-scheme : dark)").matches
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 };
