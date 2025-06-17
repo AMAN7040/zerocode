@@ -9,7 +9,7 @@ interface ThemeContextProps {
   handleTheme: (t: Theme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextProps | undefined>({
+const ThemeContext = createContext<ThemeContextProps>({
   theme: "light",
   handleTheme: () => {},
 });
