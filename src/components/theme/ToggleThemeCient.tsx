@@ -1,7 +1,5 @@
-import { ThemeToggle } from "./toggleTheme"
+import { ThemeToggle } from "./ToggleTheme";
 
 export default function ToggleThemeClient() {
-    return (
-        <ThemeToggle/>
-    );
-};
+  return <ThemeToggle />;
+}
