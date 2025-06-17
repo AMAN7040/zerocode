@@ -17,15 +17,17 @@ export const ThemeToggle = () => {
       aria-label="Toggle Theme"
       className="relative w-10 h-10 flex items-center justify-center p-2 rounded border bg-foreground text-background transition-colors duration-300"
     >
-      <FiSun
-        className={clsx(
-          "absolute w-5 h-5 text-yellow-500 transition-all duration-300",
-          theme === "light" ? "opacity-100 scale-100" : "opacity-0 scale-75"
-        )}
-      />
       <FiMoon
         className={clsx(
           "absolute w-5 h-5 text-blue-400 transition-all duration-300",
+          theme === "light" ? "opacity-100 scale-100" : "opacity-0 scale-75"
+        )}
+      />
+
+      {/* Show Sun if switching to light */}
+      <FiSun
+        className={clsx(
+          "absolute w-5 h-5 text-yellow-500 transition-all duration-300",
           theme === "dark" ? "opacity-100 scale-100" : "opacity-0 scale-75"
         )}
       />
