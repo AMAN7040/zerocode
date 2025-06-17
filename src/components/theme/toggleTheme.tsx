@@ -1,3 +1,5 @@
+"use client";
+
 import { useThemeContext } from "@/context/ThemeContext";
 import { clsx } from "clsx";
 import { FiMoon, FiSun } from "react-icons/fi";
