@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AuthResult,
   AuthUser,
@@ -20,6 +22,7 @@ import { decodeMockJWT } from "@/lib/jwt";
 interface AuthContextProps {
   user: AuthUser | null;
   token: string | null;
+  isAuthLoading: boolean;
   login: (data: LoginCredentials) => Promise<AuthResult>;
   register: (data: RegisterCredentials) => Promise<AuthResult>;
   logout: () => void;
@@ -30,6 +33,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -38,6 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(decode);
       setToken(storedToken);
     }
+    setIsAuthLoading(false);
   }, []);
 
   const login = useCallback(
@@ -73,7 +78,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token,isAuthLoading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
