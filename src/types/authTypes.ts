@@ -1,17 +1,19 @@
 export interface LoginCredentials {
   email: string;
-  passowrd: string;
+  password: string;
 }
 
 export interface RegisterCredentials extends LoginCredentials {
   name: string;
 }
 
-export interface ApiResponse {
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface AuthResponse {
   token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
+  user: AuthUser;
 }
