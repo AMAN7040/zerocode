@@ -119,6 +119,15 @@ export default function AuthForm({ mode }: AuthFormProps) {
       >
         {isSubmitting ? "Submitting..." : isLogin ? "Login" : "Register"}
       </button>
+      <p className="text-center text-sm">
+        {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+        <a
+          href={isLogin ? "/register" : "/login"}
+          className="text-primary font-medium underline"
+        >
+          {isLogin ? "Register" : "Login"}
+        </a>
+      </p>
     </form>
   );
 }
