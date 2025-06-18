@@ -1,44 +1,31 @@
-"use client";
-
+import { ChatMessage, sendMessageToBot } from "@/services/charService";
 import { useState } from "react";
-import { nanoid } from "nanoid";
-import { Message } from "@/types/message";
 
 export function useChat() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [isBotTyping, setIsBotTyping] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = (content: string) => {
-    if (!content.trim()) return;
+  const sendMessage = async (userMessage: string) => {
+    const newMessage: ChatMessage = { role: "user", content: userMessage };
+    setMessages((prev) => [...prev, newMessage]);
 
-    const userMessage: Message = {
-      id: nanoid(),
-      role: "user",
-      content,
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setIsBotTyping(true);
-
-    // Simulate bot response
-    setTimeout(() => {
-      const botMessage: Message = {
-        id: nanoid(),
-        role: "bot",
-        content: `You said: "${content}"`,
-      };
-      setMessages((prev) => [...prev, botMessage]);
-      setIsBotTyping(false);
-    }, 1000);
+    setIsLoading(true);
+    try {
+      const botResponse = await sendMessageToBot(userMessage);
+      setMessages((prev) => [...prev, botResponse]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "bot", content: "Something went wrong. Try again." },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
     messages,
-    input,
-    setInput,
+    isLoading,
     sendMessage,
-    isBotTyping,
   };
 }
