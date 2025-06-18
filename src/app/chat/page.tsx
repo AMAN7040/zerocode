@@ -1,7 +1,7 @@
 import ChatWindow from "@/components/chat/ChatWindow";
 import AuthGuard from "@/components/layout/AuthGuard";
 import ChatInput from "@/components/layout/ChatLayout";
-import ToggleThemeClient from "@/components/theme/ToggleThemeCient";
+import ToggleThemeClient from "@/components/theme/ToggleThemeClient";
 
 import React from "react";
 
