@@ -17,3 +17,15 @@ export interface AuthResponse {
   token: string;
   user: AuthUser;
 }
+ 
+export interface AuthSuccess{
+    success: true,
+    data: AuthResponse,
+}
+
+export interface AuthFailure{
+   success: false,
+   error: string,
+}
+
+export type AuthResult = AuthSuccess | AuthFailure;
