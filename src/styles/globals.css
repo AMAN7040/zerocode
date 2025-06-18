@@ -4,6 +4,29 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-wa-green: var(--wa-green);
+  --color-wa-light-bg: var(--wa-light-bg);
+  --color-wa-dark-bg: var(--wa-dark-bg);
+  --color-wa-bot-bubble: var(--wa-bot-bubble);
+  --color-wa-bg: var(--wa-bg);
+  --color-wa-text: var(--wa-text);
+}
+
+@layer base {
+  :root {
+    --wa-green: #25d366;
+    --wa-light-bg: #ece5dd;
+    --wa-bot-bubble: #f0f0f0;
+    --wa-bg: #ffffff;
+    --wa-text: #111111;
+  }
+
+  .dark {
+    --wa-light-bg: #1e1e1e;
+    --wa-bot-bubble: #2a2f32;
+    --wa-bg: #0d1418;
+    --wa-text: #ededed;
+  }
 }
 
 :root {
