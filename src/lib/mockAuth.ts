@@ -1,5 +1,5 @@
 import {
-  AuthResponse,
+  AuthResult,
   AuthUser,
   LoginCredentials,
   RegisterCredentials,
@@ -22,11 +22,11 @@ const saveUsers = (
 
 export const userRegister = async (
   data: RegisterCredentials
-): Promise<AuthResponse | string> => {
+): Promise<AuthResult> => {
   const users = getUsers();
 
   if (users[data.email]) {
-    return "Users already exists";
+    return { success: false, error: "Users already exists" };
   }
 
   users[data.email] = { name: data.name, password: data.password };
@@ -40,18 +40,18 @@ export const userRegister = async (
 
   const token = generateMockJWT(user);
 
-  return { token, user };
+  return { success: true, data: { token, user } };
 };
 
 export const userLogin = async (
   data: LoginCredentials
-): Promise<AuthResponse | string> => {
+): Promise<AuthResult> => {
   const users = getUsers();
   const userRecord = users[data?.email];
 
-  if (!userRecord) return "Users does not exists";
-  if (userRecord.password !== data.email) return "Incorrect Password";
-
+  if (!userRecord) return { success: false, error: "Users does not exists" };
+  if (userRecord.password !== data.password)
+    return { success: false, error: "Incorrect Password" };
   const user: AuthUser = {
     id: data.email,
     name: userRecord.name,
@@ -60,5 +60,5 @@ export const userLogin = async (
 
   const token = generateMockJWT(user);
 
-  return { token, user };
+  return { success: true, data: { token, user } };
 };
