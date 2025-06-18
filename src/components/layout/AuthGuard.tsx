@@ -1,21 +1,20 @@
+"use client";
+
 import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
-  const auth = useAuthContext();
+  const { user, token, isAuthLoading } = useAuthContext();
   const router = useRouter();
-  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (!auth) return;
-    if (!auth.user || !auth.token) {
-      router.replace("/login");
-    } else {
-      setChecked(true);
+    if (!isAuthLoading && (!user || !token)) {
+      router.push("/login");
     }
-  }, [auth, router]);
+  }, [user, token, isAuthLoading, router]);
 
-  if (!checked) return null;
+  if (isAuthLoading || !user || !token) return null;
+
   return <>{children}</>;
 }
