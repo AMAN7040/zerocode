@@ -16,7 +16,7 @@ export function useChat() {
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { role: "bot", content: "Something went wrong. Try again." },
+        { role: "bot", content: `Something went wrong. Try again. ${err}` },
       ]);
     } finally {
       setIsLoading(false);
