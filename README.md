@@ -6,12 +6,8 @@ A production-grade, chatbot web application built using **Next.js App Router**, 
 
 ## 🚀 Demo
 
-**Live URL**:  
-**Test Credentials**:
-- Email: `amansingh79620@gmail.com`
-- Password: `aman@1`
+**Live URL**: [https://zerocode-git-main-aman7040s-projects.vercel.app/] 
 
----
 
 ## 📸 Screenshots
 
