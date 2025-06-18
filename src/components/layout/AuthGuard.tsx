@@ -1,22 +1,21 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function AuthGuard({children}:{children: React.ReactNode}) {
-  const {user, token} = useAuthContext();
-  const router= useRouter();
+export default function AuthGuard({ children }: { children: React.ReactNode }) {
+  const auth = useAuthContext();
+  const router = useRouter();
+  const [checked, setChecked] = useState(false);
 
-  useEffect(()=> {
-    if(!user || !token){
-        router.push("/login");
+  useEffect(() => {
+    if (!auth) return;
+    if (!auth.user || !auth.token) {
+      router.replace("/login");
+    } else {
+      setChecked(true);
     }
-  },[user, token, router]);
+  }, [auth, router]);
 
-  if(!user || !token) return null;
-
-  return (
-    <>
-    {children}
-    </>
-  )
+  if (!checked) return null;
+  return <>{children}</>;
 }
